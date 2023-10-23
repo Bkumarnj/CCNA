@@ -1,0 +1,137 @@
+username BKNJ-NetAdmin privilege 15 
+enable secret NetAdmin123@BKNJ
+
+---------------------------------------------------
+
+
+enable
+configure terminal
+
+hostname bknj-site01-dgw1
+
+line vty 0 4
+logging synchronous
+exit
+
+interface loopback0
+ip address 172.16.0.1 255.255.255.252
+no shutdown
+exit
+
+interface gigabitethernet1/1/4
+no switchport
+ip address 192.168.10.2 255.255.255.252
+no shutdown
+ip routing
+
+
+spanning-tree portfast bpduguard default
+spanning-tree mode rapid-pvst
+spanning-tree vlan 1-4094 priority 4096
+
+vlan 3
+name Net_Management
+exit
+
+vlan 10
+name BKNJ_Guests
+exit
+
+vlan 20
+name BKNJ_Devices
+exit
+
+vlan 30
+name BKNJ_Security
+exit
+
+vlan 60
+name BKNJ_employees
+exit
+
+vlan 100
+name BKNJ_infra
+exit
+
+interface vlan3
+description Net_Management
+ip address 172.16.3.2 255.255.255.240
+no shutdown
+exit
+
+interface vlan10
+description BKNJ_Guests
+ip address 172.16.10.2 255.255.255.224
+ip helper-address 172.16.3.12
+no shutdown
+exit
+
+interface vlan20
+description BKNJ_Devices
+ip address 172.16.20.2 255.255.255.224
+ip helper-address 172.16.3.12
+no shutdown
+exit
+
+interface vlan30
+description BKNJ_Security
+ip address 172.16.30.2 255.255.255.224
+ip helper-address 172.16.3.12
+no shutdown
+exit
+
+interface vlan60
+description BKNJ_employees
+ip address 172.16.60.2 255.255.255.224
+ip helper-address 172.16.3.12
+no shutdown
+exit
+
+interface vlan100
+description BKNJ_infra
+ip address 172.16.100.2 255.255.255.248
+ip helper-address 172.16.3.12
+no shutdown
+exit
+
+interface range gigabitethernet1/1/2-3
+switport mode trunk
+switchport trunk allowed vlan all
+channel-group 11 mode active
+exit
+
+interface port-channel11
+description # to Secondary Dist #
+exit
+
+interface range gigabitethernet1/0/20-24
+switport mode trunk
+switchport trunk allowed vlan all
+exit
+
+interface range gigabitethernet1/0/1-6
+switchport mode access
+switchport access vlan 20
+spanning-tree portfast
+exit
+
+interface range gigabitethernet1/0/7-12
+switchport mode access
+switchport access vlan 30
+spanning-tree portfast
+exit
+
+interface range gigabitethernet1/0/13-18
+switchport mode access
+switchport access vlan 60
+spanning-tree portfast
+exit
+
+interface range gigabitethernet1/0/19
+switchport mode access
+switchport access vlan 3
+spanning-tree portfast
+exit
+
+ip route 0.0.0.0 0.0.0.0 192.168.10.3
+
