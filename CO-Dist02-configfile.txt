@@ -59,6 +59,10 @@ name BKNJ_infra
 interface vlan3
 description Net_Management
 ip add 172.16.1.7 255.255.255.224
+standby version 2
+standby 3 ip 172.16.3.1
+standby 3 priority 100
+standby preempt
 no shutdown
 exit
 
@@ -66,6 +70,10 @@ interface vlan10
 description BKNJ_Devices
 ip add 172.16.1.23 255.255.255.240
 ip helper-address 172.16.3.12
+standby version 2
+standby 10 ip 172.16.10.1
+standby 10 priority 100
+standby preempt
 no shutdown
 exit
 
@@ -73,6 +81,10 @@ interface vlan20
 description BKNJ_Guests
 ip add 172.16.1.56 255.255.255.224
 ip helper-address 172.16.3.12
+standby version 2
+standby 20 ip 172.16.20.1
+standby 20 priority 100
+standby preempt
 no shutdown
 exit
 
@@ -80,6 +92,10 @@ interface vlan30
 description BKNJ_Security
 ip add 172.16.1.89 255.255.255.224
 ip helper-address 172.16.3.12
+standby version 2
+standby 30 ip 172.16.30.1
+standby 30 priority 100
+standby preempt
 no shutdown
 exit
 
@@ -87,6 +103,10 @@ interface vlan60
 description BKNJ_employees
 ip add 172.16.1.122 255.255.255.224
 ip helper-address 172.16.3.12
+standby version 2
+standby 60 ip 172.16.60.1
+standby 60 priority 100
+standby preempt
 no shutdown
 exit
 
@@ -94,6 +114,10 @@ interface vlan100
 description BKNJ_infra
 ip add 172.16.1.155 255.255.255.248
 ip helper-address 172.16.3.12
+standby version 2
+standby 100 ip 172.16.100.1
+standby 100 priority 100
+standby preempt
 no shutdown
 exit
 
@@ -132,8 +156,15 @@ exit
 
 interface range gigabitethernet1/0/19
 switchport mode access
-switchport access vlan 13
+switchport access vlan 3
 spanning-tree portfast
 exit
 
 ip route 0.0.0.0 0.0.0.0 192.168.11.3
+
+
+End
+
+Write
+
+
