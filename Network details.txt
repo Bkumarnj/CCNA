@@ -1,9 +1,11 @@
-Corprate office:
+Corporate office:
 
-2 Routers: 
-gateway01 = s1-r1r1-co-gw1
-gateway02 = s1-r2r1-co-gw2
+2 P2P Circuits: Defined
 
-2 Distribution switches:
+2 Distribution switches: Ereceted 
 Dist01 = s1-r1r2-co-dgw1
 Dist02 = s1-r2r2-co-dgw2
+
+2 Wireless LAN Controllers:
+WLC01 = bknj-s1-wlc01
+WLC02 = bknj-s1-wlc02
