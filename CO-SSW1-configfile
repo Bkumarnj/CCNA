@@ -1,0 +1,62 @@
+enable 
+configure Terminal
+
+hostname bknj-co-ssw1
+
+spanning-tree portfast bpduguard default
+spanning-tree mode rapid-pvst
+spanning-tree vlan 1-4094 priority 28672
+
+interface vlan 3
+ip address 172.16.3.8 255.255.255.240
+no shutdown
+exit
+ 
+vlan 3
+name Net_Management
+exit
+
+vlan 10
+name BKNJ_Guests
+exit
+
+vlan 20
+name BKNJ_Devices
+exit
+
+vlan 30
+name BKNJ_Security
+exit
+
+vlan 60
+name BKNJ_employees
+exit
+
+vlan 100
+name BKNJ_infra
+exit
+
+interface range gigabitethernet0/1
+description ## to BKNJ-CO-DGW01:gi1/1/3 ##
+switchport mode trunk
+switchport trunk allowed vlan all
+channel-group 1 mode active
+no shutdown
+exit
+
+interface range gigabitethernet1/1
+description ## to BKNJ-CO-SSW02:gi1/1 ##
+switchport mode trunk
+switchport trunk allowed vlan all
+channel-group 1 mode passive
+no shutdown
+exit
+
+interface port-channel1
+description ## Port-Channel to BKNJ-CO-SSW02:gi1/1 ##
+switchport mode trunk
+switchport trunk allowed vlan all
+no shutdown
+exit
+
+
