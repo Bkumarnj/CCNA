@@ -1,10 +1,3 @@
-username BKNJ-NetAdmin privilege 15 
-enable secret NetAdmin123@BKNJ
-
-ip ftp username BKNJ-NetAdmin
-ip ftp password 7 NetAdmin123@BKNJ
-
----------------------------------------------------
 
 
 enable
@@ -13,14 +6,28 @@ configure terminal
 hostname bknj-site01-dgw1
 ip domain name bknj.com
 ip name-server 172.16.100.4
+logging console 
+logging buffered 8192
+logging host 172.16.100.4
+logging host 172.16.100.5
+logging on
+logging trap debbuging
+logging userinfo
+lldp run
+
+
+username BKNJ-NetAdmin privilege 15 
+enable secret NetAdmin123@BKNJ
+
+ip ftp username BKNJ-NetAdmin
+ip ftp password 7 NetAdmin123@BKNJ
 
 ip ssh authentication-retries 5
-ip ssh source-interface Vlan60
 ip ssh version 2 
 crypto key generate rsa general-keys modulus 2048
 
 
-ine console 0
+line console 0
 exec-timeout 5 30
 logging synchronous
 login local
@@ -31,16 +38,6 @@ exec-timeout 5 30
 logging synchronous
 login 
 exit
-
-logging console 
-logging buffered 8192
-logging host 172.16.100.4
-logging host 172.16.100.5
-logging on
-logging trap debbuging
-logging userinfo
-lldp run
-
 
 interface loopback0
 ip address 172.16.0.1 255.255.255.252
