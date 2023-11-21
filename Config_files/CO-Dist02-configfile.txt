@@ -198,6 +198,7 @@ lldp transmit
 no shutdown
 exit
 
+
 interface port-channel11
 description # to Primary Dist #
 switchport mode trunk
@@ -221,7 +222,7 @@ no shutdown
 exit
 
 
-interface range gigabitethernet1/0/19-24
+interface range gigabitethernet1/0/19-23
 switchport mode trunk
 switchport trunk allowed vlan all
 ip dhcp snooping trust
@@ -230,6 +231,7 @@ ip arp inspection limit rate 50 burst interval 1
 lldp receive
 lldp transmit
 exit
+
 
 interface range gigabitethernet1/0/1-6
 switchport mode access
