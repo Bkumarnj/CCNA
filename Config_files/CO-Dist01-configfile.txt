@@ -3,7 +3,7 @@
 enable
 configure terminal
 
-hostname bknj-site01-dgw1
+hostname bknj-co-dgw1
 ip domain name bknj.com
 ip name-server 172.16.100.4
 logging console 
