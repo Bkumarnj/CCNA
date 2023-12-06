@@ -47,7 +47,7 @@ exit
 interface gigabitethernet1/1/4
 no switchport
 ip address 192.168.10.2 255.255.255.252
-Description #P2P-BKNJ-DC-EGW01:P=ISP1
+Description #P2P-BKNJ-DC-EGW01-gi0/0/0:P=ISP1
 lldp receive
 lldp transmit
 no shutdown
@@ -225,8 +225,20 @@ lldp transmit
 no shutdown
 exit
 
+interface gigabitethernet1/0/24
+switchport mode trunk
+switchport trunk allowed vlan all
+switchport trunk native vlan 3
+description # to BKNJ-CO-WLC01:gi5 #
+ip dhcp snooping trust
+ip arp inspection trust
+ip arp inspection limit rate 50 burst interval 1
+lldp receive
+lldp transmit
+no shutdown
+exit
 
-interface range gigabitethernet1/0/20-24
+interface range gigabitethernet1/0/20-23
 switchport mode trunk
 switchport trunk allowed vlan all
 ip dhcp snooping trust
@@ -276,17 +288,10 @@ lldp receive
 lldp transmit
 exit
 
+
 ip routing
+ip route 0.0.0.0 255.255.255.0 192.168.10.3 
 
-router ospf 1
-network 172.16.0.0 0.0.0.255 area 0
-log-adjacency-changes
-passive-interface loopback0
-passive-interface gigabitethernet1/1/4
-exit
-
-ip route 192.168.10.2 255.255.255.252 192.168.10.3
-ip route 0.0.0.0 255.255.255.0 192.168.10.3 200
 
 ntp authenticate
 ntp authentication-key 1 md5 NetAdmin123@BKNJ
