@@ -1,7 +1,7 @@
 enable 
 configure Terminal
 
-hostname bknj-co-ssw1
+hostname bknj-co-ssw2
 ip domain name bknj.com
 ip name-server 172.16.100.4
 logging console 
@@ -46,7 +46,7 @@ shut down
 exit
 
 interface vlan 3
-ip address 172.16.3.9 255.255.255.240
+ip address 172.16.3.6 255.255.255.240
 no shutdown
 exit
  

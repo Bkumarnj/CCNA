@@ -104,6 +104,8 @@ exit
 interface vlan3
 description Net_Management
 ip address 172.16.3.2 255.255.255.240
+ip helper-address 172.16.100.4
+ip helper-address 172.16.100.5
 standby version 2
 standby 3 ip 172.16.3.1
 standby 3 priority 200
